@@ -1,6 +1,6 @@
 module github.com/sagernet/cronet-go/all
 
-go 1.24.0
+go 1.27.1
 
 require (
 	github.com/sagernet/cronet-go v0.0.0-20260926100742-df0c319e1c07
