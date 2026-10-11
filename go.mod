@@ -1,6 +1,6 @@
 module github.com/sagernet/cronet-go
 
-go 1.27.1
+go 1.28
 
 require (
 	github.com/ebitengine/purego v0.10.0

@@ -1,6 +1,6 @@
 module github.com/sagernet/cronet-go/test
 
-go 1.27.1
+go 1.28
 
 require (
 	github.com/miekg/dns v1.1.72
