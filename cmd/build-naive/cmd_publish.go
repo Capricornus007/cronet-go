@@ -142,6 +142,16 @@ func generateAllGoMod(allDirectory, pseudoVersion string, builtTargets []string)
 		fmt.Fprintf(&builder, "\tgithub.com/sagernet/cronet-go/lib/%s %s\n", targetName, pseudoVersion)
 	}
 	builder.WriteString(")\n")
+	// 這些 pseudo-version 只存在於本倉 push 出去的 go 分支；照 module path 去
+	// 上游解析必定 unknown revision（fork 的 Build 就是卡在這）。publish 在
+	// worktree 裡跑，`all/` 的上一層就是主模組、`../lib/<target>` 就是各子模組，
+	// 用目錄 replace 讓 tidy 完全不必下載這幾個模組。
+	builder.WriteString("\nreplace (\n")
+	builder.WriteString("\tgithub.com/sagernet/cronet-go => ../\n")
+	for _, targetName := range builtTargets {
+		fmt.Fprintf(&builder, "\tgithub.com/sagernet/cronet-go/lib/%s => ../lib/%s\n", targetName, targetName)
+	}
+	builder.WriteString(")\n")
 
 	goModPath := filepath.Join(allDirectory, "go.mod")
 	err := os.WriteFile(goModPath, []byte(builder.String()), 0o644)
