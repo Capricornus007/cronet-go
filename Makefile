@@ -28,4 +28,4 @@ lint:
 	golangci-lint run
 
 lint_install:
-	go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.4.0
+	go install -v github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.15.0
