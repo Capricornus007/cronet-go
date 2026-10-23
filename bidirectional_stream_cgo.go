@@ -119,7 +119,7 @@ func (c BidirectionalStream) Read(buffer []byte) int {
 	if len(buffer) == 0 {
 		return int(C.bidirectional_stream_read((*C.bidirectional_stream)(unsafe.Pointer(c.ptr)), nil, 0))
 	}
-	return int(C.bidirectional_stream_read((*C.bidirectional_stream)(unsafe.Pointer(c.ptr)), (*C.char)((unsafe.Pointer)(&buffer[0])), C.int(len(buffer))))
+	return int(C.bidirectional_stream_read((*C.bidirectional_stream)(unsafe.Pointer(c.ptr)), (*C.char)(unsafe.Pointer(&buffer[0])), C.int(len(buffer))))
 }
 
 // Write Writes request data from |buffer| If auto flush is
